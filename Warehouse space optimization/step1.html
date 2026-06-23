@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Warehouse - Space Optimization Configuration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#001848",
+                        "on-surface-variant": "#434654",
+                        "tertiary-fixed-dim": "#4cd6ff",
+                        "on-secondary-fixed-variant": "#3f4759",
+                        "secondary-fixed": "#dbe2f9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#191c1e",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "outline": "#737685",
+                        "surface": "#f8f9fc",
+                        "surface-container-highest": "#e1e2e5",
+                        "primary": "#003d9b",
+                        "on-tertiary-fixed-variant": "#004e60",
+                        "surface-tint": "#0c56d0",
+                        "outline-variant": "#c3c6d6",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f8f9fc",
+                        "secondary-container": "#dbe2f9",
+                        "surface-container": "#edeef1",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#dae2ff",
+                        "on-secondary-fixed": "#141b2c",
+                        "on-tertiary-container": "#84dfff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2e3133",
+                        "primary-container": "#0052cc",
+                        "inverse-on-surface": "#f0f1f4",
+                        "on-error": "#ffffff",
+                        "secondary": "#565e71",
+                        "on-tertiary-fixed": "#001f28",
+                        "surface-container-low": "#f2f3f6",
+                        "surface-dim": "#d9dadd",
+                        "on-secondary-container": "#5c6477",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "surface-container-high": "#e7e8eb",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#b7eaff",
+                        "tertiary": "#004a5c",
+                        "surface-variant": "#e1e2e5",
+                        "inverse-primary": "#b2c5ff",
+                        "background": "#f8f9fc",
+                        "on-primary-container": "#c4d2ff",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#00637a",
+                        "secondary-fixed-dim": "#bfc6dc",
+                        "primary-fixed-dim": "#b2c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-highest shadow-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16 w-full">
+<div class="flex items-center space-x-4">
+<span class="text-xl font-bold tracking-tight text-on-surface">Smart Warehouse</span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed">
+                        0/1 Knapsack Algorithm
+                    </span>
+</div>
+<div class="hidden md:flex space-x-8">
+<!-- Nav items intentionally omitted as this is a configuration/setup step (linear flow) -->
+</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-secondary hover:text-on-surface cursor-pointer transition-colors" style="font-variation-settings: 'FILL' 0;">help</span>
+<span class="material-symbols-outlined text-secondary hover:text-on-surface cursor-pointer transition-colors" style="font-variation-settings: 'FILL' 0;">settings</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow flex items-center justify-center p-6 sm:p-12">
+<div class="max-w-md w-full">
+<div class="mb-8 text-center">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-fixed text-primary mb-4 shadow-sm">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">warehouse</span>
+</div>
+<h1 class="text-3xl font-bold tracking-tight text-on-surface mb-2 font-headline">Step 1: Configuration</h1>
+<p class="text-on-surface-variant font-body">Define the fundamental constraints of your storage facility before optimizing item placement.</p>
+</div>
+<!-- Configuration Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_12px_32px_-4px_rgba(25,28,30,0.08)] p-8 relative overflow-hidden">
+<!-- Decorative gradient -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary-container"></div>
+<h2 class="text-lg font-semibold text-on-surface mb-6 font-headline flex items-center">
+<span class="material-symbols-outlined mr-2 text-primary">tune</span>
+                    Warehouse Configuration
+                </h2>
+<form action="#" class="space-y-8" method="POST">
+<!-- Input Group -->
+<div class="space-y-2">
+<label class="block text-xs font-semibold tracking-wider text-on-surface uppercase font-label" for="capacity">
+                            Total Storage Capacity
+                        </label>
+<div class="relative rounded-lg shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-outline">scale</span>
+</div>
+<input aria-describedby="capacity-units" class="block w-full rounded-lg border-0 bg-surface-container-low py-3 pl-10 pr-16 text-on-surface ring-0 placeholder:text-outline-variant focus:ring-2 focus:ring-inset focus:ring-primary focus:bg-surface-container-lowest transition-all font-body text-lg" id="capacity" name="capacity" placeholder="0.00" type="number"/>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+<span class="text-secondary sm:text-sm font-medium" id="capacity-units">units</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant mt-1 font-body">Maximum allowable weight or volume across all zones.</p>
+</div>
+<!-- Action Button -->
+<div class="pt-2">
+<button class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-on-primary bg-gradient-to-br from-primary to-primary-container hover:from-primary-container hover:to-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all active:scale-[0.98] font-label" type="button">
+                            Set Capacity &amp; Continue
+                            <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</button>
+</div>
+</form>
+<!-- Contextual Info -->
+<div class="mt-6 pt-6 border-t border-surface-variant flex items-start">
+<span class="material-symbols-outlined text-tertiary mr-3 mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="text-xs text-on-surface-variant leading-relaxed font-body">
+                         This capacity acts as the primary constraint (W) in the Knapsack optimization engine. Ensure this value accurately reflects operational limits to prevent algorithm overflow.
+                     </p>
+</div>
+</div>
+<!-- Breadcrumbs / Steps Indicator -->
+<div class="mt-8 flex justify-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+</div>
+</div>
+</main>
+</body></html>

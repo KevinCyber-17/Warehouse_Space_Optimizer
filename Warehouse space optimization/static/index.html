@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Optimization Results - Kinetic Blueprint</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#0c56d0",
+                      "on-tertiary-fixed-variant": "#38485d",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#e0e3e5",
+                      "primary-container": "#00276a",
+                      "tertiary-fixed": "#d3e4fe",
+                      "on-surface": "#191c1e",
+                      "secondary-fixed-dim": "#b7c8de",
+                      "on-primary-container": "#618eff",
+                      "on-error": "#ffffff",
+                      "on-background": "#191c1e",
+                      "surface-container-low": "#f2f4f6",
+                      "surface-dim": "#d8dadc",
+                      "on-secondary-fixed": "#0b1d2d",
+                      "primary": "#00143f",
+                      "secondary-container": "#d2e4fb",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#b2c5ff",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#07182b",
+                      "background": "#f7f9fb",
+                      "secondary-fixed": "#d2e4fb",
+                      "on-primary-fixed": "#001848",
+                      "on-secondary-container": "#556679",
+                      "surface": "#f7f9fb",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-container": "#8495ad",
+                      "outline": "#747780",
+                      "on-secondary-fixed-variant": "#38485a",
+                      "surface-container-high": "#e6e8ea",
+                      "tertiary-fixed-dim": "#b7c8e1",
+                      "surface-container": "#eceef0",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#43474f",
+                      "outline-variant": "#c4c6d0",
+                      "primary-fixed": "#dae2ff",
+                      "error-container": "#ffdad6",
+                      "secondary": "#4f6073",
+                      "on-tertiary-fixed": "#0b1c30",
+                      "surface-container-highest": "#e0e3e5",
+                      "tertiary-container": "#1d2d41",
+                      "on-primary-fixed-variant": "#0040a2",
+                      "surface-bright": "#f7f9fb",
+                      "primary-fixed-dim": "#b2c5ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans", "sans-serif"],
+                      "body": ["Inter", "sans-serif"],
+                      "label": ["Inter", "sans-serif"]
+              }
+            }
+          }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass-effect { @apply bg-surface-variant/70 backdrop-blur-[24px]; }
+            .gradient-primary { @apply bg-gradient-to-r from-primary to-primary-container; }
+            .ghost-border { @apply border border-outline-variant/15; }
+            .text-display-lg { @apply font-headline text-[3.5rem] leading-tight font-bold tracking-tight; }
+            .text-headline-sm { @apply font-headline text-[1.5rem] leading-tight font-semibold tracking-tight; }
+            .text-title-md { @apply font-body text-[1.125rem] leading-snug font-medium; }
+            .text-body-md { @apply font-body text-[0.875rem] leading-normal; }
+            .text-label-sm { @apply font-label text-[0.6875rem] leading-none font-medium uppercase tracking-wider; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-background text-on-background font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl border-b border-slate-200/50 shadow-sm transition-all duration-200 ease-in-out flex justify-between items-center px-6 h-16">
+    <div class="flex items-center gap-8">
+        <h1 class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-tighter text-primary">Smart Warehouse<span class="hidden md:inline"> Space Optimization System</span></h1>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-tertiary hidden lg:flex">0/1 Knapsack Engine</span>
+    </div>
+    <div class="flex items-center gap-4">
+        <button onclick="openHelpModal()" class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-primary transition-colors hover:bg-slate-100/50 rounded-lg">
+            <span class="material-symbols-outlined">help_outline</span>
+        </button>
+        <div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant/30 ml-2">
+            <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMThjXgZvCDYbA2wYGhd8E-1HsMmTdA1-iNAwHkPbOHsOXZYnQgSI3I2Z3GV9GjGLj0G0pNgCj3BBGpCTSEbPJrjNFzEphfscZma92kpbdTRTJoxYo6di_wm9nuVhO1l-ISS3G1IdIK3Xb4Tx2fyG8eVS5mtX3gw89ySMXARZHBKRgtCEL4_Npc09sN3owxDmMGE1E154rVt4Xf5lrpQqEQ4IadB3AQahXApK_UrzHHm7L2IwvW7mBKkwcf9MAOTa1XwsP92hR7NE"/>
+        </div>
+    </div>
+</header>
+
+<div class="flex flex-1 pt-16">
+    <!-- SideNavBar -->
+    <aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container-low flat no-border flex flex-col p-4 gap-2 z-40 hidden md:flex border-r border-surface-dim/50">
+        <div class="mb-6 px-3 py-2 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center text-on-primary shadow-sm">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warehouse</span>
+            </div>
+            <div>
+                <h2 class="font-headline text-sm font-bold text-primary leading-tight">Your Warehouse</h2>
+                <p class="font-body text-xs text-on-surface-variant/70 mt-0.5">Space Optimizer</p>
+            </div>
+        </div>
+        <nav class="flex flex-col gap-1 flex-1">
+            <a onclick="startFresh()" class="flex items-center gap-3 px-4 py-3 font-['Inter'] text-sm font-medium text-slate-600 hover:bg-slate-200/50 rounded-xl hover:scale-[1.02] transition-transform cursor-pointer group">
+                <span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">home</span> Start Fresh
+            </a>
+            <a onclick="document.getElementById('step2-card').classList.contains('hidden') ? null : document.getElementById('step2-card').scrollIntoView({behavior: 'smooth'})" class="flex items-center gap-3 px-4 py-3 font-['Inter'] text-sm font-medium text-slate-600 hover:bg-slate-200/50 rounded-xl hover:scale-[1.02] transition-transform cursor-pointer group">
+                <span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">inventory_2</span> Add Items
+            </a>
+            <a onclick="document.getElementById('step3-card').classList.contains('hidden') ? null : document.getElementById('step3-card').scrollIntoView({behavior: 'smooth'})" class="flex items-center gap-3 px-4 py-3 font-['Inter'] text-sm font-medium text-slate-600 hover:bg-slate-200/50 rounded-xl hover:scale-[1.02] transition-transform cursor-pointer group">
+                <span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">bar_chart</span> Results
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 md:ml-64 p-6 md:p-8 lg:p-12 pb-24 max-w-[1400px] mx-auto w-full border-l border-transparent">
+        
+        <!-- Step Indicators -->
+        <div class="flex justify-center items-center space-x-4 mb-12">
+            <div class="flex flex-col items-center">
+                <div id="step-num-1" class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center text-sm font-bold active">1</div>
+                <span id="step-label-1" class="text-xs font-medium text-primary mt-2 active">Capacity</span>
+            </div>
+            <div id="step-line-1" class="w-16 h-0.5 bg-surface-variant"></div>
+            <div class="flex flex-col items-center">
+                <div id="step-num-2" class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center text-sm font-bold">2</div>
+                <span id="step-label-2" class="text-xs font-medium text-on-surface-variant mt-2">Items</span>
+            </div>
+            <div id="step-line-2" class="w-16 h-0.5 bg-surface-variant"></div>
+            <div class="flex flex-col items-center">
+                <div id="step-num-3" class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center text-sm font-bold">3</div>
+                <span id="step-label-3" class="text-xs font-medium text-on-surface-variant mt-2">Results</span>
+            </div>
+        </div>
+        
+        <!-- =======================
+             STEP 1: CAPACITY
+        ======================== -->
+        <section id="step1-card" class="max-w-2xl mx-auto mt-12">
+            <div class="mb-8 text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-fixed text-primary mb-4 shadow-sm">
+                    <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">dataset</span>
+                </div>
+                <h1 class="text-3xl font-bold tracking-tight text-on-surface mb-2 font-headline">Step 1: Configuration</h1>
+                <p class="text-on-surface-variant font-body">Enter the capacity of your warehouse to get started.</p>
+            </div>
+            
+            <div class="bg-surface-container-lowest rounded-xl shadow-[0_12px_32px_-4px_rgba(25,28,30,0.08)] p-8 relative overflow-hidden ring-1 ring-outline-variant/15">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary-container"></div>
+                <h2 class="text-lg font-semibold text-on-surface mb-6 font-headline flex items-center">
+                    <span class="material-symbols-outlined mr-2 text-primary">scale</span> Warehouse Capacity
+                </h2>
+                <div class="space-y-8">
+                    <div class="space-y-2">
+                        <label class="block text-xs font-semibold tracking-wider text-on-surface uppercase font-label" for="capacity-input">Total Storage Capacity</label>
+                        <div class="relative rounded-lg shadow-sm">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <span class="material-symbols-outlined text-outline">scale</span>
+                            </div>
+                            <input id="capacity-input" type="number" min="1" placeholder="e.g. 100" class="block w-full rounded-lg border-0 bg-surface-container-low py-4 pl-10 pr-16 text-on-surface ring-0 placeholder:text-outline-variant focus:ring-2 focus:ring-inset focus:ring-primary focus:bg-surface-container-lowest transition-all font-body text-lg" />
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
+                                <span class="text-secondary font-medium">units</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-on-surface-variant mt-1 font-body">The maximum weight or units your warehouse can hold.</p>
+                    </div>
+                    <div class="pt-2">
+                        <button id="set-capacity-btn" onclick="setCapacity()" class="w-full flex justify-center items-center py-4 px-4 rounded-lg shadow-sm text-[0.875rem] font-bold text-on-primary bg-gradient-to-br from-primary to-primary-container hover:from-primary-container hover:to-primary focus:outline-none focus:ring-2 focus:ring-primary active:scale-[0.98] transition-all font-label">
+                            Set Capacity & Continue
+                            <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =======================
+             STEP 2: ADD ITEMS
+        ======================== -->
+        <section id="step2-card" class="hidden">
+            <div class="flex flex-col gap-2 mb-6">
+                <span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline">Step 2 of 3</span>
+                <h1 class="text-[2.5rem] font-bold tracking-tight text-primary leading-tight font-headline">Add Items</h1>
+            </div>
+
+            <div class="bg-surface-container-lowest rounded-xl flex flex-col overflow-hidden relative shadow-[0_12px_32px_-4px_rgba(25,28,30,0.08)] ring-1 ring-outline-variant/15">
+                <!-- Card Header -->
+                <div class="px-8 py-6 flex justify-between items-end bg-gradient-to-r from-surface-container-lowest to-surface-container-low/50 border-b border-surface-variant/50">
+                    <div>
+                        <h2 class="text-[1.125rem] font-bold text-on-surface">Add Warehouse Items</h2>
+                        <p class="text-sm text-on-surface-variant mt-1">List the items you want to pack into your warehouse.</p>
+                    </div>
+                    <div class="flex flex-col items-end">
+                        <span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline mb-1">Target Capacity</span>
+                        <div class="text-[1.5rem] font-bold text-primary tracking-tight font-headline"><span id="capacity-badge">—</span><span class="text-sm font-medium text-outline ml-1 font-body">units</span></div>
+                    </div>
+                </div>
+
+                <!-- Form Area -->
+                <div class="p-8 bg-surface-container-lowest">
+                    <form id="item-form" onsubmit="addItem(event)" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Item Name</label>
+                            <input id="item-name" type="text" placeholder="e.g. Pallet A-12" class="bg-surface-container-low border-none rounded-md px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all placeholder:text-outline-variant" required />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Weight (units)</label>
+                            <input id="item-weight" type="number" min="1" placeholder="0" class="bg-surface-container-low border-none rounded-md px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all placeholder:text-outline-variant" required />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Category</label>
+                            <div class="relative">
+                                <select id="item-category" class="w-full bg-surface-container-low border-none rounded-md px-4 py-2.5 text-sm appearance-none focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all text-on-surface" required>
+                                    <option disabled selected value="">Select category...</option>
+                                    <option value="Food">Food</option>
+                                    <option value="Medicine">Medicine</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                                <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none" style="font-size: 20px;">expand_more</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant flex items-center gap-1">Value Score <span class="material-symbols-outlined text-[14px] text-outline cursor-help" title="Priority, importance, or profit multiplier">info</span></label>
+                            <input id="item-value" type="number" min="1" placeholder="e.g. 80" class="bg-surface-container-low border-none rounded-md px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all placeholder:text-outline-variant" required />
+                        </div>
+                        
+                        <div class="col-span-1 md:col-span-2 flex items-center gap-4 mt-2 pt-6 border-t border-surface-variant/50">
+                            <button id="add-item-btn" type="submit" class="bg-gradient-to-br from-primary to-primary-container text-white text-[0.875rem] font-bold px-6 py-2.5 rounded-md hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm">
+                                <span class="material-symbols-outlined text-sm">add</span> Add Item
+                            </button>
+                            <button type="button" onclick="resetCapacity()" class="text-primary hover:bg-surface-container-high px-4 py-2.5 rounded-md text-[0.875rem] font-medium transition-colors">
+                                Change Capacity
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Data Table Section -->
+                <div id="item-list-section" class="px-8 pb-8 bg-surface-container-lowest">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-[0.875rem] font-bold text-on-surface flex items-center gap-2">Items Queued <span id="item-count-badge" class="bg-surface-container-low text-on-surface-variant px-2 py-0.5 rounded-full text-[10px] uppercase font-bold">0</span></h3>
+                        <button id="clear-items-btn" onclick="clearItems()" class="text-[0.6875rem] font-bold uppercase tracking-wider text-error hover:underline hidden">Clear All</button>
+                    </div>
+                    <div id="item-table-wrap" class="overflow-x-auto rounded-lg ring-1 ring-outline-variant/15">
+                        <div id="empty-state" class="p-8 text-center text-on-surface-variant text-sm font-medium">No items added yet.</div>
+                        <table id="items-table" class="w-full text-left border-collapse hidden">
+                            <thead>
+                                <tr class="bg-surface-container-low text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline">
+                                    <th class="px-4 py-3 font-medium w-12">#</th>
+                                    <th class="px-4 py-3 font-medium">Item Name</th>
+                                    <th class="px-4 py-3 font-medium">Weight</th>
+                                    <th class="px-4 py-3 font-medium">Category</th>
+                                    <th class="px-4 py-3 font-medium">Value</th>
+                                    <th class="px-4 py-3 font-medium text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="items-tbody" class="text-[0.875rem] divide-y divide-surface-variant/50">
+                                <!-- Data populated via app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Optimization Action Bar -->
+                <div id="optimize-section" class="bg-inverse-surface px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-6 mt-auto hidden">
+                    <div class="flex gap-8 text-inverse-on-surface">
+                        <div class="flex flex-col">
+                            <span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline-variant mb-1">Total Items</span>
+                            <span id="total-items-count" class="text-[1.125rem] font-bold">0</span>
+                        </div>
+                        <div class="w-px h-8 bg-outline-variant/30 self-center"></div>
+                        <div class="flex flex-col">
+                            <span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline-variant mb-1">Total Weight</span>
+                            <span class="text-[1.125rem] font-bold"><span id="total-weight-count">0</span><span class="text-sm font-normal text-outline-variant ml-1">units</span></span>
+                        </div>
+                        <div class="w-px h-8 bg-outline-variant/30 self-center hidden sm:block"></div>
+                        <div class="flex flex-col hidden sm:flex">
+                            <span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline-variant mb-1">Capacity Constraint</span>
+                            <span class="text-[1.125rem] font-bold text-tertiary-fixed"><span id="capacity-summary">0</span> units</span>
+                        </div>
+                    </div>
+                    <button id="optimize-btn" onclick="optimizeStorage()" class="w-full md:w-auto bg-gradient-to-r from-tertiary to-tertiary-container text-white text-[0.875rem] font-bold px-8 py-3 rounded-md hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-lg shadow-tertiary/20">
+                        <span class="material-symbols-outlined text-[18px]">play_arrow</span> Run Optimization
+                    </button>
+                    <div class="text-xs text-error hidden" id="priority-note"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =======================
+             STEP 3: RESULTS
+        ======================== -->
+        <section id="step3-card" class="hidden">
+            <div class="mb-8 flex justify-between items-end">
+                <div>
+                    <div class="flex items-center gap-2 text-on-surface-variant text-label-sm mb-3">
+                        <span>RESULTS</span>
+                        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                        <span class="text-primary font-bold">STEP 3</span>
+                    </div>
+                    <h2 class="text-headline-sm text-primary mb-2 font-headline">Optimization Results</h2>
+                    <p class="text-body-md text-on-surface-variant">Check out which items were selected to maximize your warehouse value!</p>
+                </div>
+                <div>
+                    <button onclick="startFresh()" class="text-on-surface-variant hover:text-primary hover:bg-surface-container font-body text-sm font-medium py-2 px-4 rounded-lg transition-colors flex items-center gap-2 border border-outline-variant/30 bg-surface-container-lowest shadow-sm">
+                        <span class="material-symbols-outlined text-[18px]">refresh</span> Start Fresh
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-surface-container-highest/50 border-l-4 border-tertiary rounded-r-lg p-4 mb-8 flex items-start gap-3">
+                <span class="material-symbols-outlined text-tertiary mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
+                <div>
+                    <p class="text-body-md text-on-surface font-medium">Optimization Complete</p>
+                    <p class="text-body-md text-on-surface-variant mt-1">We've calculated the best items to store. Check the 'Rejected' items below to see what couldn't fit into the warehouse capacity.</p>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex flex-col justify-between relative overflow-hidden group border border-outline-variant/10">
+                    <div class="absolute top-0 right-0 p-4 opacity-10"><span class="material-symbols-outlined text-[64px] text-primary">scale</span></div>
+                    <p class="text-label-sm text-on-surface-variant mb-2">WEIGHT USED</p>
+                    <div class="flex items-baseline gap-1 font-headline"><span id="stat-total-weight" class="text-[2.5rem] font-bold text-primary leading-tight tracking-tight">0</span></div>
+                </div>
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex flex-col justify-between relative overflow-hidden group border border-outline-variant/10">
+                    <div class="absolute top-0 right-0 p-4 opacity-10"><span class="material-symbols-outlined text-[64px] text-primary">archive</span></div>
+                    <p class="text-label-sm text-on-surface-variant mb-2">REMAINING CAPACITY</p>
+                    <div class="flex items-baseline gap-1 font-headline"><span id="stat-remaining" class="text-[2.5rem] font-bold text-on-surface leading-tight tracking-tight">0</span></div>
+                </div>
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex flex-col justify-between relative overflow-hidden group border border-outline-variant/10">
+                    <div class="absolute top-0 right-0 p-4 opacity-10"><span class="material-symbols-outlined text-[64px] text-primary">stars</span></div>
+                    <p class="text-label-sm text-on-surface-variant mb-2">TOTAL VALUE</p>
+                    <div class="flex items-baseline gap-1 font-headline"><span id="stat-total-value" class="text-[2.5rem] font-bold text-primary leading-tight tracking-tight">0</span></div>
+                </div>
+                <div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex flex-col justify-between relative overflow-hidden group border border-outline-variant/10">
+                    <div class="absolute top-0 right-0 p-4 opacity-10"><span class="material-symbols-outlined text-[64px] text-primary">category</span></div>
+                    <p class="text-label-sm text-on-surface-variant mb-2">ITEMS SELECTED</p>
+                    <div class="flex items-baseline gap-1 font-headline"><span id="stat-selected-count" class="text-[2.5rem] font-bold text-on-surface leading-tight tracking-tight">0</span></div>
+                </div>
+            </div>
+
+            <!-- Complex Area: Progress & Chart -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Utilization -->
+                <div class="lg:col-span-1 flex flex-col gap-6">
+                    <div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex-1 border border-outline-variant/10">
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="text-title-md text-primary font-bold">Capacity Utilization</h3>
+                            <span id="capacity-percent-text" class="text-display-lg text-primary text-[2rem] font-headline font-bold">0%</span>
+                        </div>
+                        <div class="w-full h-4 bg-surface-container-high rounded-full overflow-hidden mb-3 ghost-border">
+                            <div id="capacity-bar-fill" class="h-full gradient-primary rounded-full relative transition-all duration-1000" style="width: 0%">
+                                <div class="absolute top-0 left-0 w-full h-1/2 bg-white/20 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-center items-center text-center h-full border border-surface-dim/50">
+                        <h4 class="text-title-md text-on-surface mb-2 font-bold flex items-center justify-center gap-2"><span class="material-symbols-outlined text-[20px] text-on-surface-variant">tune</span> Add Another Batch</h4>
+                        <div class="w-full mt-4">
+                            <button onclick="addMoreItems()" class="w-full border-2 border-outline-variant text-primary hover:bg-surface-container-highest font-body text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors flex justify-center items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">add</span> Return to Payload Screen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chart -->
+                <div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex flex-col border border-outline-variant/10">
+                    <h3 class="text-title-md text-primary font-bold mb-4">Value vs. Weight Analysis</h3>
+                    <div class="flex-1 min-h-[300px] w-full relative rounded-lg flex items-center justify-center">
+                        <canvas id="wv-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] overflow-hidden border border-outline-variant/10">
+                <div class="px-6 py-5 border-b border-surface-dim/50 bg-surface-bright flex justify-between items-center">
+                    <h3 class="text-title-md text-primary font-bold">Item Decision Log</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-surface-dim/50 bg-surface-container-low/50">
+                                <th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold">STATUS</th>
+                                <th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold">ITEM NAME</th>
+                                <th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold">CATEGORY</th>
+                                <th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold text-right">WEIGHT</th>
+                                <th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold text-right">VALUE</th>
+                                <th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold">DECISION RATIONALE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-tbody" class="text-body-md divide-y divide-surface-dim/20">
+                            <!-- Populated by app.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Help Modal -->
+<div id="help-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-surface-variant/70 backdrop-blur-sm" onclick="closeHelpModal()"></div>
+    
+    <!-- Modal Content -->
+    <div class="bg-surface-container-lowest rounded-2xl shadow-2xl relative z-10 w-full max-w-lg overflow-hidden border border-outline-variant/20 transform transition-all">
+        <!-- Header -->
+        <div class="px-6 py-4 border-b border-surface-dim/30 bg-surface-container-low/50 flex justify-between items-center">
+            <h2 class="text-xl font-bold text-primary font-headline flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">lightbulb</span> How It Works
+            </h2>
+            <button onclick="closeHelpModal()" class="text-outline hover:text-error transition-colors p-1 rounded-md hover:bg-error-container/50">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <!-- Body -->
+        <div class="p-6 space-y-6 text-on-surface-variant font-body text-sm">
+            <p>Welcome to the <strong>Smart Warehouse Space Optimization System</strong>! This tool helps you figure out the most profitable or important items to store when you have limited warehouse space.</p>
+            
+            <div class="space-y-4">
+                <div class="flex gap-4 items-start">
+                    <div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-sm shrink-0">1</div>
+                    <div>
+                        <h4 class="font-bold text-on-surface text-base">Set Capacity</h4>
+                        <p class="mt-1">Start by telling us the maximum weight (or volume) your warehouse can handle.</p>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4 items-start">
+                    <div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-sm shrink-0">2</div>
+                    <div>
+                        <h4 class="font-bold text-on-surface text-base">Add Items</h4>
+                        <p class="mt-1">List all the potential items you could store. Give each item a weight and a <strong>Value Score</strong> (think of value as priority, profit, or importance).</p>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4 items-start">
+                    <div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-sm shrink-0">3</div>
+                    <div>
+                        <h4 class="font-bold text-on-surface text-base">Optimize</h4>
+                        <p class="mt-1">Click "Run Optimization". Under the hood, we use the famous <strong>0/1 Knapsack algorithm</strong> to automatically select a combination of items that maximizes the total value without exceeding your capacity constraints!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-tertiary-fixed-dim/30 border-l-4 border-tertiary p-3 rounded-r-md text-tertiary text-xs">
+                <strong>Pro Tip:</strong> If two items have the same weight and value, the algorithm will break the tie by choosing essential categories like Food and Medicine first!
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="px-6 py-4 bg-surface-container-low/30 border-t border-surface-dim/30 flex justify-end">
+            <button onclick="closeHelpModal()" class="bg-primary text-on-primary px-5 py-2 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity shadow-sm">Got it!</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

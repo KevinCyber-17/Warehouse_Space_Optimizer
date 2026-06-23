@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Warehouse Space Optimization System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f8f9fc",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#b2c5ff",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "primary-container": "#0052cc",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "secondary-fixed": "#dbe2f9",
+                    "secondary-fixed-dim": "#bfc6dc",
+                    "on-secondary-container": "#5c6477",
+                    "surface-bright": "#f8f9fc",
+                    "on-background": "#191c1e",
+                    "surface": "#f8f9fc",
+                    "on-primary-container": "#c4d2ff",
+                    "on-surface-variant": "#434654",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f2f3f6",
+                    "on-tertiary-fixed-variant": "#004e60",
+                    "on-tertiary-fixed": "#001f28",
+                    "secondary-container": "#dbe2f9",
+                    "primary-fixed": "#dae2ff",
+                    "tertiary-fixed-dim": "#4cd6ff",
+                    "surface-container-highest": "#e1e2e5",
+                    "surface-container-high": "#e7e8eb",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "tertiary-fixed": "#b7eaff",
+                    "primary": "#003d9b",
+                    "surface-variant": "#e1e2e5",
+                    "surface-dim": "#d9dadd",
+                    "surface-tint": "#0c56d0",
+                    "on-primary-fixed-variant": "#0040a2",
+                    "on-primary-fixed": "#001848",
+                    "on-secondary-fixed": "#141b2c",
+                    "tertiary": "#004a5c",
+                    "inverse-surface": "#2e3133",
+                    "error-container": "#ffdad6",
+                    "secondary": "#565e71",
+                    "on-tertiary-container": "#84dfff",
+                    "surface-container": "#edeef1",
+                    "outline": "#737685",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#00637a",
+                    "outline-variant": "#c3c6d6",
+                    "on-secondary-fixed-variant": "#3f4759",
+                    "inverse-on-surface": "#f0f1f4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Inter"
+                    ],
+                    "body": [
+                            "Inter"
+                    ],
+                    "label": [
+                            "Inter"
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-[#f8f9fc] dark:bg-slate-900 w-full top-0 sticky font-['Inter'] font-medium text-sm tracking-tight border-b-0" style="box-shadow: 0 1px 0 0 #e1e2e5;">
+<div class="flex justify-between items-center px-8 h-16 w-full max-w-[1920px] mx-auto">
+<!-- Brand -->
+<div class="flex items-center gap-6">
+<span class="text-xl font-bold tracking-tighter text-[#003d9b] dark:text-blue-500">Architectural Ledger</span>
+<!-- Search -->
+<div class="relative hidden md:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-md py-1.5 pl-9 pr-3 text-sm focus:ring-2 focus:ring-primary/40 focus:outline-none placeholder:text-outline-variant transition-all" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="hidden md:flex items-center gap-1 h-full">
+<a class="h-full flex items-center px-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 ease-in-out" href="#">Inventory</a>
+<a class="h-full flex items-center px-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 ease-in-out" href="#">Racks</a>
+<a class="h-full flex items-center px-4 text-[#0052CC] dark:text-blue-400 border-b-2 border-[#0052CC] pb-1 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 ease-in-out" href="#">Optimization</a>
+<a class="h-full flex items-center px-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 ease-in-out" href="#">Logistics</a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-primary transition-colors hover:bg-slate-100 p-2 rounded-full scale-95 duration-150 ease-in-out flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-500 hover:text-primary transition-colors hover:bg-slate-100 p-2 rounded-full scale-95 duration-150 ease-in-out flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/15 flex-shrink-0">
+<img alt="Warehouse Manager Profile" class="w-full h-full object-cover" data-alt="professional portrait of warehouse manager in well lit office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMxJdlX5kURE4yFyDBc1C481MDazG9dIFPc4dDZpZW9O70UB2njwxraJVyPBX781OLyv9qxnIdM1I08u5wn0xN-fPGRhnhWd2aIdDu_HuqFEyH0JVYaOZVYVi7kN_sGs11w01LXfN3pjKINP4FI8AwA240wmdSYwjn0ONK72RhyrGSD-H_qMj-jebZYXJqJ4ecXx5AZcHb9Pfw8EOJyN2sLj3n5VwzST_H8v5Do6s3WE_En7333G8DfjrMBTpEWgDVwOBxxvod6hE"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow p-6 md:p-12 w-full max-w-[1400px] mx-auto grid grid-cols-1 gap-8">
+<!-- Header Zone -->
+<div class="flex flex-col gap-2 mb-4">
+<span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline">Step 2 of 4</span>
+<h1 class="text-[2.5rem] font-bold tracking-tight text-primary leading-tight">Optimization Payload</h1>
+</div>
+<!-- Add Items Card (surface-container-lowest on surface background) -->
+<div class="bg-surface-container-lowest rounded-xl flex flex-col overflow-hidden relative shadow-[0_12px_32px_-4px_rgba(25,28,30,0.08)] ring-1 ring-outline-variant/15">
+<!-- Card Header -->
+<div class="px-8 py-6 flex justify-between items-end bg-gradient-to-r from-surface-container-lowest to-surface-container-low/50 border-b border-surface-variant/50">
+<div>
+<h2 class="text-[1.125rem] font-bold text-on-surface">Add Warehouse Items</h2>
+<p class="text-sm text-on-surface-variant mt-1">Define items to be allocated within the designated storage zone.</p>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline mb-1">Target Capacity</span>
+<div class="text-[1.5rem] font-bold text-primary tracking-tight">100<span class="text-sm font-medium text-outline ml-1">units</span></div>
+</div>
+</div>
+<!-- Form Area -->
+<div class="p-8 bg-surface-container-lowest">
+<form class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+<!-- Item Name -->
+<div class="flex flex-col gap-2">
+<label class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Item Name</label>
+<input class="bg-surface-container-low border-none rounded-md px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all placeholder:text-outline-variant" placeholder="e.g. Pallet A-12" type="text"/>
+</div>
+<!-- Weight -->
+<div class="flex flex-col gap-2">
+<label class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Weight (kg)</label>
+<input class="bg-surface-container-low border-none rounded-md px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all placeholder:text-outline-variant" placeholder="0.00" type="number"/>
+</div>
+<!-- Category -->
+<div class="flex flex-col gap-2">
+<label class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Category</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low border-none rounded-md px-4 py-2.5 text-sm appearance-none focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all text-on-surface">
+<option disabled="" selected="" value="">Select category...</option>
+<option value="food">Food</option>
+<option value="medicine">Medicine</option>
+<option value="electronics">Electronics</option>
+<option value="others">Others</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Value -->
+<div class="flex flex-col gap-2">
+<label class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant flex items-center gap-1">
+                            Value Rating
+                            <span class="material-symbols-outlined text-[14px] text-outline cursor-help" data-icon="info" title="Priority, importance, or profit multiplier">info</span>
+</label>
+<input class="bg-surface-container-low border-none rounded-md px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all placeholder:text-outline-variant" max="10" min="1" placeholder="1-10" type="number"/>
+</div>
+<!-- Actions -->
+<div class="col-span-1 md:col-span-2 flex items-center gap-4 mt-4 pt-6 border-t border-surface-variant/50">
+<button class="bg-gradient-to-br from-primary to-primary-container text-white text-[0.875rem] font-bold px-6 py-2.5 rounded-md hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                            Add Item
+                        </button>
+<button class="text-primary hover:bg-surface-container-high px-4 py-2.5 rounded-md text-[0.875rem] font-medium transition-colors" type="button">
+                            Change Capacity
+                        </button>
+</div>
+</form>
+</div>
+<!-- Data Table Section -->
+<div class="px-8 pb-8 bg-surface-container-lowest">
+<h3 class="text-[0.875rem] font-bold text-on-surface mb-4">Items Queued for Optimization</h3>
+<div class="overflow-x-auto rounded-lg ring-1 ring-outline-variant/15">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline">
+<th class="px-4 py-3 font-medium w-12">#</th>
+<th class="px-4 py-3 font-medium">Item Name</th>
+<th class="px-4 py-3 font-medium">Weight</th>
+<th class="px-4 py-3 font-medium">Category</th>
+<th class="px-4 py-3 font-medium">Value</th>
+<th class="px-4 py-3 font-medium text-right">Action</th>
+</tr>
+</thead>
+<tbody class="text-[0.875rem] divide-y divide-surface-variant/50">
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-4 py-3 text-outline">01</td>
+<td class="px-4 py-3 font-medium text-on-surface">Medical Supply Box Alpha</td>
+<td class="px-4 py-3 text-on-surface-variant">45 kg</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[0.6875rem] font-bold uppercase tracking-wider bg-secondary-container text-on-secondary-container">Medicine</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold">9.5</span>
+</div>
+</td>
+<td class="px-4 py-3 text-right">
+<button class="text-outline hover:text-error transition-colors p-1 rounded-md hover:bg-error-container/50">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-4 py-3 text-outline">02</td>
+<td class="px-4 py-3 font-medium text-on-surface">Emergency Rations Pack</td>
+<td class="px-4 py-3 text-on-surface-variant">120 kg</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[0.6875rem] font-bold uppercase tracking-wider bg-surface-container-high text-on-surface-variant">Food</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold">8.0</span>
+</div>
+</td>
+<td class="px-4 py-3 text-right">
+<button class="text-outline hover:text-error transition-colors p-1 rounded-md hover:bg-error-container/50">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Optimization Action Bar (Dark Theme per spec) -->
+<div class="bg-inverse-surface px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-6 mt-auto">
+<div class="flex gap-8 text-inverse-on-surface">
+<div class="flex flex-col">
+<span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline-variant mb-1">Total Items</span>
+<span class="text-[1.125rem] font-bold">2</span>
+</div>
+<div class="w-px h-8 bg-outline-variant/30 self-center"></div>
+<div class="flex flex-col">
+<span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline-variant mb-1">Total Weight</span>
+<span class="text-[1.125rem] font-bold">165<span class="text-sm font-normal text-outline-variant ml-1">kg</span></span>
+</div>
+<div class="w-px h-8 bg-outline-variant/30 self-center hidden sm:block"></div>
+<div class="flex flex-col hidden sm:flex">
+<span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline-variant mb-1">Capacity Utilization</span>
+<div class="flex items-center gap-2">
+<div class="w-24 h-1.5 bg-outline-variant/30 rounded-full overflow-hidden">
+<div class="w-[2%] h-full bg-tertiary-fixed rounded-full"></div>
+</div>
+<span class="text-[0.875rem] font-bold text-tertiary-fixed">2%</span>
+</div>
+</div>
+</div>
+<button class="w-full md:w-auto bg-gradient-to-r from-tertiary to-tertiary-container text-white text-[0.875rem] font-bold px-8 py-3 rounded-md hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-lg shadow-tertiary/20">
+<span class="material-symbols-outlined text-[18px]" data-icon="play_arrow">play_arrow</span>
+                    Run Optimization
+                </button>
+</div>
+</div>
+</main>
+</body></html>

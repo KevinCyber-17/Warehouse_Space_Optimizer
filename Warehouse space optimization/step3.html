@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Optimization Results - Kinetic Blueprint</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#0c56d0",
+                      "on-tertiary-fixed-variant": "#38485d",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#e0e3e5",
+                      "primary-container": "#00276a",
+                      "tertiary-fixed": "#d3e4fe",
+                      "on-surface": "#191c1e",
+                      "secondary-fixed-dim": "#b7c8de",
+                      "on-primary-container": "#618eff",
+                      "on-error": "#ffffff",
+                      "on-background": "#191c1e",
+                      "surface-container-low": "#f2f4f6",
+                      "surface-dim": "#d8dadc",
+                      "on-secondary-fixed": "#0b1d2d",
+                      "primary": "#00143f",
+                      "secondary-container": "#d2e4fb",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#b2c5ff",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#07182b",
+                      "background": "#f7f9fb",
+                      "secondary-fixed": "#d2e4fb",
+                      "on-primary-fixed": "#001848",
+                      "on-secondary-container": "#556679",
+                      "surface": "#f7f9fb",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-container": "#8495ad",
+                      "outline": "#747780",
+                      "on-secondary-fixed-variant": "#38485a",
+                      "surface-container-high": "#e6e8ea",
+                      "tertiary-fixed-dim": "#b7c8e1",
+                      "surface-container": "#eceef0",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#43474f",
+                      "outline-variant": "#c4c6d0",
+                      "primary-fixed": "#dae2ff",
+                      "error-container": "#ffdad6",
+                      "secondary": "#4f6073",
+                      "on-tertiary-fixed": "#0b1c30",
+                      "surface-container-highest": "#e0e3e5",
+                      "tertiary-container": "#1d2d41",
+                      "on-primary-fixed-variant": "#0040a2",
+                      "surface-bright": "#f7f9fb",
+                      "primary-fixed-dim": "#b2c5ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": [
+                              "Plus Jakarta Sans", "sans-serif"
+                      ],
+                      "body": [
+                              "Inter", "sans-serif"
+                      ],
+                      "label": [
+                              "Inter", "sans-serif"
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .glass-effect {
+                @apply bg-surface-variant/70 backdrop-blur-[24px];
+            }
+            .gradient-primary {
+                @apply bg-gradient-to-r from-primary to-primary-container;
+            }
+            .ghost-border {
+                @apply border border-outline-variant/15;
+            }
+            .text-display-lg {
+                @apply font-headline text-[3.5rem] leading-tight font-bold tracking-tight;
+            }
+            .text-headline-sm {
+                @apply font-headline text-[1.5rem] leading-tight font-semibold tracking-tight;
+            }
+            .text-title-md {
+                @apply font-body text-[1.125rem] leading-snug font-medium;
+            }
+            .text-body-md {
+                @apply font-body text-[0.875rem] leading-normal;
+            }
+            .text-label-sm {
+                @apply font-label text-[0.6875rem] leading-none font-medium uppercase tracking-wider;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-800/50 shadow-sm transition-all duration-200 ease-in-out flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-8">
+<h1 class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-tighter text-blue-900 dark:text-white">Kinetic Blueprint</h1>
+</div>
+<!-- Centered Navigation - WEB -->
+<nav class="hidden md:flex gap-6 absolute left-1/2 -translate-x-1/2">
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-tight text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors py-5" href="#">Analytics</a>
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-tight text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1 py-5" href="#">Execution</a>
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-tight text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors py-5" href="#">Reports</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors hover:bg-slate-100/50 dark:hover:bg-slate-800/50 rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white transition-colors hover:bg-slate-100/50 dark:hover:bg-slate-800/50 rounded-lg">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant/30 ml-2">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="Close up portrait of a professional man in a modern office environment with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMThjXgZvCDYbA2wYGhd8E-1HsMmTdA1-iNAwHkPbOHsOXZYnQgSI3I2Z3GV9GjGLj0G0pNgCj3BBGpCTSEbPJrjNFzEphfscZma92kpbdTRTJoxYo6di_wm9nuVhO1l-ISS3G1IdIK3Xb4Tx2fyG8eVS5mtX3gw89ySMXARZHBKRgtCEL4_Npc09sN3owxDmMGE1E154rVt4Xf5lrpQqEQ4IadB3AQahXApK_UrzHHm7L2IwvW7mBKkwcf9MAOTa1XwsP92hR7NE"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 pt-16">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-slate-50 dark:bg-slate-950 tonal-shift bg-slate-100 dark:bg-slate-900 flat no-border flex flex-col p-4 gap-2 z-40 hidden md:flex">
+<div class="mb-6 px-3 py-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warehouse</span>
+</div>
+<div>
+<h2 class="font-headline text-sm font-bold text-blue-900 dark:text-blue-200 leading-tight">Warehouse Alpha</h2>
+<p class="font-body text-xs text-on-surface-variant/70 mt-0.5">Zone 4 Optimization</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 font-['Inter'] text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl hover:scale-[1.02] transition-transform cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-blue-700 transition-colors">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 font-['Inter'] text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl hover:scale-[1.02] transition-transform cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-blue-700 transition-colors">inventory_2</span>
+                    Inventory
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 font-['Inter'] text-sm font-medium bg-white dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 shadow-sm rounded-xl hover:scale-[1.02] transition-transform cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">history</span>
+                    Optimization History
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 font-['Inter'] text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl hover:scale-[1.02] transition-transform cursor-pointer active:scale-95 group mt-auto mb-4" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-blue-700 transition-colors">settings</span>
+                    Settings
+                </a>
+</nav>
+<button class="w-full mt-auto gradient-primary text-on-primary font-body text-sm font-medium py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+                Run New Analysis
+            </button>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-6 md:p-8 lg:p-12 pb-24 max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<div class="mb-8">
+<div class="flex items-center gap-2 text-on-surface-variant text-label-sm mb-3">
+<span>EXECUTION</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>ZONE 4</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">STEP 3</span>
+</div>
+<h2 class="text-headline-sm text-primary mb-2">Optimization Results</h2>
+<p class="text-body-md text-on-surface-variant">Review the calculated spatial allocation and value retention metrics.</p>
+</div>
+<!-- Warning Banner -->
+<div class="bg-error-container/40 border-l-4 border-error rounded-r-lg p-4 mb-8 flex items-start gap-3">
+<span class="material-symbols-outlined text-error mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<p class="text-body-md text-on-surface font-medium">Constraint Notice</p>
+<p class="text-body-md text-on-surface-variant mt-1">Lower priority items may be rejected based on the current optimization constraints. Review the decision log below.</p>
+</div>
+</div>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex flex-col justify-between h-full relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[64px] text-primary">scale</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant mb-2">WEIGHT USED</p>
+<div class="flex items-baseline gap-1">
+<span class="text-display-lg text-primary">850</span>
+<span class="text-title-md text-on-surface-variant font-medium">kg</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-label-sm text-surface-tint">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>Near optimal</span>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex flex-col justify-between h-full relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[64px] text-primary">archive</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant mb-2">REMAINING CAPACITY</p>
+<div class="flex items-baseline gap-1">
+<span class="text-display-lg text-on-surface">150</span>
+<span class="text-title-md text-on-surface-variant font-medium">kg</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Buffer zone active</span>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex flex-col justify-between h-full relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[64px] text-primary">stars</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant mb-2">TOTAL VALUE SCORE</p>
+<div class="flex items-baseline gap-1">
+<span class="text-display-lg text-primary">94</span>
+<span class="text-title-md text-on-surface-variant font-medium">/100</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-label-sm text-emerald-600">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span>Top 5% efficiency</span>
+</div>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex flex-col justify-between h-full relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[64px] text-primary">category</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant mb-2">ITEMS SELECTED</p>
+<div class="flex items-baseline gap-1">
+<span class="text-display-lg text-on-surface">24</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">format_list_bulleted</span>
+<span>Out of 32 candidates</span>
+</div>
+</div>
+</div>
+<!-- Complex Area: Progress & Chart -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+<!-- Left Column: Utilization -->
+<div class="lg:col-span-1 flex flex-col gap-8">
+<!-- Capacity Bar -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)]">
+<div class="flex justify-between items-end mb-4">
+<h3 class="text-title-md text-primary font-bold">Capacity Utilization</h3>
+<span class="text-display-lg text-primary text-[2.5rem]">85%</span>
+</div>
+<div class="w-full h-4 bg-surface-container-high rounded-full overflow-hidden mb-3 ghost-border">
+<div class="h-full gradient-primary rounded-full relative" style="width: 85%">
+<!-- Subtle reflection line -->
+<div class="absolute top-0 left-0 w-full h-1/2 bg-white/20 rounded-full"></div>
+</div>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant">
+<span>0kg</span>
+<span>Target: 80-90%</span>
+<span>1000kg Max</span>
+</div>
+</div>
+<!-- Actions Card -->
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-center items-center text-center h-full border border-surface-dim/50">
+<span class="material-symbols-outlined text-[48px] text-on-surface-variant/50 mb-4">tune</span>
+<h4 class="text-title-md text-on-surface mb-2">Refine Parameters</h4>
+<p class="text-body-md text-on-surface-variant mb-6">Adjust weight constraints or priority thresholds to run a new simulation.</p>
+<div class="w-full flex flex-col gap-3">
+<button class="w-full border-2 border-outline-variant text-primary hover:bg-surface-container-highest font-body text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                                Add More Items
+                            </button>
+<button class="w-full text-on-surface-variant hover:text-primary hover:bg-surface-container font-body text-sm font-medium py-2.5 px-4 rounded-lg transition-colors">
+                                Start Fresh
+                            </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Visualization Placeholder -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-title-md text-primary font-bold">Value vs. Weight Distribution</h3>
+<div class="flex gap-2">
+<button class="p-1.5 rounded-md hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+</div>
+<!-- Chart Canvas Placeholder -->
+<div class="flex-1 min-h-[300px] w-full bg-surface relative rounded-lg border border-surface-dim/30 overflow-hidden flex items-center justify-center">
+<!-- Decorative Grid Lines -->
+<div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(0,20,63,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,20,63,0.03) 1px, transparent 1px); background-size: 40px 40px;"></div>
+<!-- Axis Labels -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 text-label-sm text-on-surface-variant">WEIGHT (KG)</div>
+<div class="absolute left-2 top-1/2 -translate-y-1/2 -rotate-90 origin-center text-label-sm text-on-surface-variant whitespace-nowrap">VALUE SCORE</div>
+<!-- Scatter points simulation -->
+<div class="absolute bottom-10 left-10 w-3 h-3 rounded-full bg-surface-tint/80 shadow-sm blur-[1px]"></div>
+<div class="absolute bottom-20 left-24 w-4 h-4 rounded-full bg-surface-tint/60 shadow-sm blur-[1px]"></div>
+<div class="absolute bottom-16 left-48 w-2 h-2 rounded-full bg-surface-tint shadow-sm blur-[1px]"></div>
+<div class="absolute top-40 left-32 w-5 h-5 rounded-full bg-surface-tint/90 shadow-sm blur-[1px]"></div>
+<div class="absolute top-24 left-64 w-3 h-3 rounded-full bg-surface-tint/70 shadow-sm blur-[1px]"></div>
+<div class="absolute top-16 right-32 w-6 h-6 rounded-full bg-primary/80 shadow-md blur-[1px]"></div>
+<div class="absolute top-32 right-48 w-4 h-4 rounded-full bg-primary shadow-sm blur-[1px]"></div>
+<!-- Reject points -->
+<div class="absolute bottom-4 right-20 w-3 h-3 rounded-full bg-error/50 shadow-sm blur-[1px]"></div>
+<div class="absolute bottom-12 right-10 w-2 h-2 rounded-full bg-error/50 shadow-sm blur-[1px]"></div>
+<!-- Trendline simulation -->
+<svg class="absolute inset-0 w-full h-full opacity-20 pointer-events-none" preserveaspectratio="none">
+<line stroke="#00143f" stroke-dasharray="4 4" stroke-width="2" x1="10%" x2="90%" y1="90%" y2="20%"></line>
+</svg>
+<div class="relative z-10 bg-surface-container-lowest/80 backdrop-blur-sm px-4 py-2 rounded-md shadow-sm border border-outline-variant/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-surface-tint">scatter_plot</span>
+<span class="text-label-sm text-on-surface">Interactive Chart View Required</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_-4px_rgba(25,28,30,0.05)] overflow-hidden">
+<div class="px-6 py-5 border-b border-surface-dim/50 flex justify-between items-center bg-surface-bright">
+<h3 class="text-title-md text-primary font-bold">Item Decision Log</h3>
+<div class="flex gap-3">
+<button class="text-body-md text-on-surface-variant hover:text-primary flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span> Filter
+                        </button>
+<button class="text-body-md text-on-surface-variant hover:text-primary flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span> Export
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-dim/50 bg-surface-container-low/50">
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold">STATUS</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold">ITEM NAME</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold">CATEGORY</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold text-right">WEIGHT (KG)</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold text-right">VALUE</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-semibold">DECISION REASON</th>
+</tr>
+</thead>
+<tbody class="text-body-md">
+<!-- Row 1 -->
+<tr class="border-b border-surface-dim/20 hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-secondary-fixed text-on-secondary-fixed text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-surface-tint"></span>
+                                        Selected
+                                    </span>
+</td>
+<td class="px-6 py-4 font-medium text-on-surface">Industrial Generator A1</td>
+<td class="px-6 py-4 text-on-surface-variant">Power Systems</td>
+<td class="px-6 py-4 text-right font-headline text-on-surface">320</td>
+<td class="px-6 py-4 text-right font-headline text-primary font-semibold">45</td>
+<td class="px-6 py-4 text-on-surface-variant text-sm">High value density relative to weight constraint.</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-surface-dim/20 hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-secondary-fixed text-on-secondary-fixed text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-surface-tint"></span>
+                                        Selected
+                                    </span>
+</td>
+<td class="px-6 py-4 font-medium text-on-surface">Pallet Jack Set</td>
+<td class="px-6 py-4 text-on-surface-variant">Handling Equip</td>
+<td class="px-6 py-4 text-right font-headline text-on-surface">150</td>
+<td class="px-6 py-4 text-right font-headline text-primary font-semibold">22</td>
+<td class="px-6 py-4 text-on-surface-variant text-sm">Essential category priority override.</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-surface-dim/20 hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-secondary-fixed text-on-secondary-fixed text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-surface-tint"></span>
+                                        Selected
+                                    </span>
+</td>
+<td class="px-6 py-4 font-medium text-on-surface">Rack End Protectors</td>
+<td class="px-6 py-4 text-on-surface-variant">Safety</td>
+<td class="px-6 py-4 text-right font-headline text-on-surface">80</td>
+<td class="px-6 py-4 text-right font-headline text-primary font-semibold">15</td>
+<td class="px-6 py-4 text-on-surface-variant text-sm">Fits within remaining capacity buffer.</td>
+</tr>
+<!-- Row 4 (Rejected) -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group bg-surface-dim/10">
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-error-container text-on-error-container text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                        Rejected
+                                    </span>
+</td>
+<td class="px-6 py-4 font-medium text-on-surface-variant">Steel Workbenches (Bulk)</td>
+<td class="px-6 py-4 text-on-surface-variant">Furniture</td>
+<td class="px-6 py-4 text-right font-headline text-on-surface-variant line-through">400</td>
+<td class="px-6 py-4 text-right font-headline text-on-surface-variant">12</td>
+<td class="px-6 py-4 text-error text-sm">Exceeds total weight capacity limit. Low value ratio.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-3 border-t border-surface-dim/50 bg-surface-bright flex justify-center">
+<button class="text-label-sm text-surface-tint hover:text-primary transition-colors flex items-center gap-1">
+                        VIEW FULL LOG <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>
